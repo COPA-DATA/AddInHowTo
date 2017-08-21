@@ -6,7 +6,7 @@ To open projects of this repository please install Visual Studio Developer Tools
 
 This repository contains frequently ask sample of zenon Add-In solutions. All projects of this folder are added to solution [HowTo.sln](HowTo.sln).
 
-## AddInSampleLibrary
+# AddInSampleLibrary
 <a name="AddInSampleLibrary"></a>
 This project demonstrates show to build custom libraries to share common code between zenon Add-Ins. Following common classes are added to this project:
 
@@ -15,7 +15,7 @@ This project demonstrates show to build custom libraries to share common code be
 * Communication: Reusable classes to interact between Add-In Extensions, WPF Elements or external code. This sample is documentated [here](#ExtensionWpfElementInteraction)
 * ErrorHandler.cs: Is used to check return values of the zenon API to ensure that the operation that has been called was successfully completed.
 
-## ExtensionWpfElementInteraction
+# ExtensionWpfElementInteraction
 <a name="ExtensionWpfElementInteraction"></a>
 This sample demonstrates how to communicate between Add-In Extensions and WPF Elements. Every extension is separated using AppDomains therefore a direct interaction between Add-In Extensions and also WPF Elements is not possible by design. Using Inter Process Communication (IPC) allows to
 share data between Add-Ins.
@@ -34,26 +34,26 @@ There are some reusable components, therefore they are defined in library AddInS
 * ServiceHost: Manages the hosting of extension services.
 * ServiceClient: Manages consuming a specific extension service.
 
-## MvvmEditorWizard
+# MvvmEditorWizard
 This sample Add-In uses MVVM using WPF.
 
 Shows an exemplarily implementation of the [MVVM Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) using WPF and zenon Add-Ins. The UI is designed as a classical Wizard, that consists of a main view and several pages. Navigation between pages is implemented using [Commands](https://www.codeproject.com/Articles/25445/WPF-Command-Pattern-Applied). 
 
 There are several folders in this project:
 
-### Assets
+## Assets
 
 All bitmaps or other resource stuff
 
-### ViewModels
+## ViewModels
 Classes that connects Views with the model. The ViewModel of MainView and base classes used for ViewModels (DataModel) and Commands (ActionCommand) are located here.
 
 The sub folder "Pages" contains base classes for page ViewModels and a concrete implementation for each page.
 
-### Views
+## Views
 Views are located in this folder. There is again a sub folder "Pages" that contains all page views.
 
-## ThreadingWizardSample
+# ThreadingWizardSample
 This sample demonstrates how to use Threads using WPF Wizards. There are different approaches available in .NET Framework, therefore the Add-In project contains four Editor Wizard extensions to demonstrate each approach. All four Wizards generate a usage statistic of data types.
 
 * NoThreadWizardExtension: This Wizard does not use a thread. The UI will block the more variables are existing in the project.
@@ -62,13 +62,13 @@ This sample demonstrates how to use Threads using WPF Wizards. There are differe
 * TplWizardExtension: Uses Task Parallel Library (TPL) to load data. The sample is again non-blocking and the recommended approach.
 
 
-## UnitTestsSample
+# UnitTestsSample
 Contains an Unit Test project, that demonstrates how to unit test classes that is using zenon API. The zenon API is simulated by using [Moq](https://github.com/moq/moq). A getting started guide for Moq is available [here](https://github.com/Moq/moq4/wiki/Quickstart). 
 
 This sample is based on [AddInSampleLibrary](#AddInSampleLibrary).
 
 
-## VariableSubscriptionSample
+# VariableSubscriptionSample
 Demonstrates how to build a reusable class for online containers for variables.
 
 This sample is based on [AddInSampleLibrary](#AddInSampleLibrary).
