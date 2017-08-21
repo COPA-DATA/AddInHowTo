@@ -37,7 +37,7 @@ There are some reusable components, therefore they are defined in library AddInS
 # MvvmEditorWizard
 This sample Add-In uses MVVM using WPF.
 
-Shows an exemplarily implementation of the [MVVM Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) using WPF and zenon Add-Ins. The UI is designed as a classical Wizard, that consists of a main view and several pages. Navigation between pages is implemented using [Commands](https://www.codeproject.com/Articles/25445/WPF-Command-Pattern-Applied). 
+Shows an exemplarily implementation of the [MVVM Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) using WPF and zenon Add-Ins. The UI is designed as a classical Wizard, which consists of a main view and several pages. Navigation between pages is implemented using [Commands](https://www.codeproject.com/Articles/25445/WPF-Command-Pattern-Applied). 
 
 There are several folders in this project:
 
@@ -63,7 +63,7 @@ This sample demonstrates how to use Threads using WPF Wizards. There are differe
 
 
 # UnitTestsSample
-Contains an Unit Test project, that demonstrates how to unit test classes that is using zenon API. The zenon API is simulated by using [Moq](https://github.com/moq/moq). A getting started guide for Moq is available [here](https://github.com/Moq/moq4/wiki/Quickstart). 
+Contains a Unit Test project, that demonstrates how to unit test classes that is using zenon API. The zenon API is simulated by using [Moq](https://github.com/moq/moq). A getting started guide for Moq is available [here](https://github.com/Moq/moq4/wiki/Quickstart). 
 
 This sample is based on [AddInSampleLibrary](#AddInSampleLibrary).
 
