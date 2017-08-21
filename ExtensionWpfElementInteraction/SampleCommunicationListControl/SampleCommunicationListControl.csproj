@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{922863CC-3AB6-4FFD-94F4-A00345BA0192}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SampleCommunicationListControl</RootNamespace>
+    <AssemblyName>SampleCommunicationListControl</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SampleCommunicationListControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WpfElementCommunicationSample\WpfElementCommunicationSample.csproj">
+      <Project>{452bbac3-b0ff-4794-b8d9-83b66a6dcb31}</Project>
+      <Name>WpfElementCommunicationSample</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <UsingTask TaskName="Zip" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
+    <ParameterGroup>
+      <OutputFilename ParameterType="System.String" Required="true" />
+      <Files ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System.IO.Compression" />
+      <Using Namespace="System.IO.Compression" />
+      <Code Type="Fragment" Language="cs"><![CDATA[
+      try
+      {
+        using (Stream zipStream = new FileStream(Path.GetFullPath(OutputFilename), FileMode.Create, FileAccess.Write))
+        using (ZipArchive archive = new ZipArchive(zipStream, ZipArchiveMode.Create))
+        {
+            foreach (ITaskItem fileItem in Files)
+            {
+                string filename = fileItem.ItemSpec;
+                using (Stream fileStream = new FileStream(filename, FileMode.Open, FileAccess.Read))
+                using (Stream fileStreamInZip = archive.CreateEntry(new FileInfo(filename).Name).Open())
+                    fileStream.CopyTo(fileStreamInZip);
+            }
+        }
+        return true;
+      }
+      catch (Exception ex)
+      {
+        Log.LogErrorFromException(ex);
+        return false;
+      }
+    ]]></Code>
+    </Task>
+  </UsingTask>
+  <Target Name="AfterBuild">
+    <ItemGroup>
+      <ZipFiles Include="$(OutputPath)AddInSampleLibrary.dll" />
+      <ZipFiles Include="$(OutputPath)CommunicationLibrary.dll" />
+      <ZipFiles Include="$(OutputPath)WpfElementCommunicationSample.dll" />
+      <ZipFiles Include="$(OutputPath)SampleCommunicationListControl.xaml" />
+    </ItemGroup>
+    <Zip OutputFilename="$(OutputPath)$(TargetName).cdwpf" Files="@(ZipFiles)" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
