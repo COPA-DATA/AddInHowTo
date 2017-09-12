@@ -119,7 +119,7 @@ namespace DriverCommon
             _log.FunctionExitMessage();
         }
 
-        public void ModifyComProperties()
+        public void ModifyCOMProperties()
         {
             _log.FunctionEntryMessage("modify COM properties");
 
