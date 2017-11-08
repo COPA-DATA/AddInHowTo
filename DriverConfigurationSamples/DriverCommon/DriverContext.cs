@@ -68,10 +68,47 @@ namespace DriverCommon
             _log.Message($" Closed driver [{_driverObject.Identification}]");
         }
 
+        public void DumpNodeInfo(string propertyName)
+        {
+            _log.Message($"  Dump node [{propertyName}]");
+            string[] propItems = _driverObject.GetDynamicProperties(propertyName);
+            _log.Message($"    has the following items");
+            foreach(string cItem in propItems)
+            {
+                char[] delimArr = { ',' };
+                string[] cValues = cItem.Split(delimArr, 5);
+                _log.Message($"      Item [{cValues[0]}] has type [{cValues[1]}] - {cValues[2]}");
+            }
+            uint connCount = Convert.ToUInt32(_driverObject.GetDynamicProperty(propertyName));
+            _log.Message($"    Node [{propertyName}] has {connCount} instances");
+        }
+
         public void GetNodeInfo(string propertyName, out string[] dynamicPropertyNames, out uint count)
         {
             dynamicPropertyNames = _driverObject.GetDynamicProperties(propertyName);
             count = Convert.ToUInt32(_driverObject.GetDynamicProperty(propertyName));
+        }
+
+        public bool AddNode(string propertyName)
+        {
+            bool bResult = false;
+            try
+            {
+                if (_driverObject.CreateDynamicProperty(propertyName) == true)
+                {
+                    _log.Message($"  created new property [{propertyName}]");
+                    bResult = true;
+                }
+                else
+                {
+                    _log.Message($"  could not create new property [{propertyName}]");
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.ExpectionMessage($"Could not create property {propertyName}", ex);
+            }
+            return bResult;
         }
 
         public void Export(string fileSuffix)
@@ -119,7 +156,7 @@ namespace DriverCommon
             _log.FunctionExitMessage();
         }
 
-        public void ModifyComProperties()
+        public void ModifyCOMProperties()
         {
             _log.FunctionEntryMessage("modify COM properties");
 
@@ -165,6 +202,22 @@ namespace DriverCommon
             }
         }
 
+        public void SetCharacterProperty(string propertyName, char setValue)
+        {
+            try
+            {
+                var propValue = _driverObject.GetDynamicProperty(propertyName);
+                char propValueOrg = Convert.ToChar(propValue);
+                char propValueNew = setValue;
+                _driverObject.SetDynamicProperty(propertyName, propValueNew);
+                _log.PropertyModifiedMessage(propertyName, propValueOrg, propValueNew, propValue.GetType().Name);
+            }
+            catch (Exception ex)
+            {
+                _log.ExpectionMessage($"Could not modify string property {propertyName}", ex);
+            }
+        }
+
         public void SetUnsignedProperty(string propertyName, uint setValue, uint minimum, uint maximum, bool modInvalid)
         {
             try
@@ -202,13 +255,13 @@ namespace DriverCommon
                 _log.ExpectionMessage($"Could not modify unsigned property {propertyName}", ex);
             }
         }
-        public void IncreaseUnsignedProperty(string propertyName, uint minimum, uint maximum)
+        public void IncreaseUnsignedProperty(string propertyName, UInt64 minimum, UInt64 maximum)
         {
             try
             {
                 var propValue = _driverObject.GetDynamicProperty(propertyName);
-                uint propValueOrg = Convert.ToUInt32(propValue);
-                uint propValueNew = propValueOrg + 1;
+                UInt64 propValueOrg = Convert.ToUInt64(propValue);
+                UInt64 propValueNew = propValueOrg + 1;
                 if (propValueNew > maximum)
                 {
                     propValueNew = minimum;
@@ -264,13 +317,13 @@ namespace DriverCommon
                 _log.ExpectionMessage($"Could not modify signed property {propertyName}", ex);
             }
         }
-        public void IncreaseSignedProperty(string propertyName, int minimum, int maximum)
+        public void IncreaseSignedProperty(string propertyName, Int64 minimum, Int64 maximum)
         {
             try
             {
                 var propValue = _driverObject.GetDynamicProperty(propertyName);
-                int propValueOrg = Convert.ToInt32(propValue);
-                int propValueNew = propValueOrg + 1;
+                Int64 propValueOrg = Convert.ToInt64(propValue);
+                Int64 propValueNew = propValueOrg + 1;
                 if (propValueNew > maximum)
                 {
                     propValueNew = minimum;
