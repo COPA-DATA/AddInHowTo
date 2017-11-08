@@ -75,12 +75,18 @@ namespace BeckhNG_API
             uint connCount;
             _driverContext.GetNodeInfo("DrvConfig.Connections", out propItems, out connCount);
 
-            for (uint idxI = 0; idxI < connCount; idxI++)
+            uint idxI;
+            for (idxI = 0; idxI < connCount; idxI++)
             {
                 ModifyConnection(idxI);
             }
 
             _log.FunctionExitMessage();
+
+            if (_driverContext.AddNode("DrvConfig.Connections[" + idxI.ToString() + "]"))
+            {
+                //ModifyConnection(idxI);
+            }
         }
 
         private void ModifyConnection(uint connIndex)

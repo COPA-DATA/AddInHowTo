@@ -62,7 +62,7 @@
     <Compile Include="Properties\AddInInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\github\AddInHowTo.Clone\DriverConfigurationSamples\DriverCommon\DriverCommon.csproj">
+    <ProjectReference Include="..\DriverCommon\DriverCommon.csproj">
       <Project>{91564894-0744-49b1-a503-e4c667076eaa}</Project>
       <Name>DriverCommon</Name>
     </ProjectReference>

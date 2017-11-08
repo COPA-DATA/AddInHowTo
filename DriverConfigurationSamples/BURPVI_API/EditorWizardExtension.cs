@@ -95,15 +95,30 @@ namespace BURPVI_API
             uint connCount;
             _driverContext.GetNodeInfo("DrvConfig.Connections", out propItems, out connCount);
 
-            for (uint idxI = 0; idxI < connCount; idxI++)
+            uint idxI;
+            for (idxI = 0; idxI < connCount; idxI++)
             {
-                ModifyConnection(idxI);
+                ModifyConnection(idxI, true);
             }
 
             _log.FunctionExitMessage();
+
+            // add a new connection (not using an index)
+            if (_driverContext.AddNode("DrvConfig.Connections"))
+            {
+                // this connection remains empty and will not be accepted by the driver!
+
+                idxI += 1;
+                // add a new connection - uses an index
+                if (_driverContext.AddNode("DrvConfig.Connections[" + idxI.ToString() + "]"))
+                {
+                    // this connection gets the minimum information necessary to be accepted by the driver
+                    ModifyConnection(idxI, false);
+                }
+            }
         }
 
-        private void ModifyConnection(uint connIndex)
+        private void ModifyConnection(uint connIndex, bool bComplete)
         {
             string connNamePrefix;
             string connIndexString = connIndex.ToString();
@@ -116,8 +131,11 @@ namespace BURPVI_API
             _driverContext.SetUnsignedProperty(connNamePrefix + "NetAddress", connIndex * 2, 0, 255, true);
             _driverContext.SetStringProperty(connNamePrefix + "Name", "Name_" + connIndexString, true);
             _driverContext.SetStringProperty(connNamePrefix + "DeviceParameter", "DevPrm_" + connIndexString, true);
-            _driverContext.SetStringProperty(connNamePrefix + "CPUParameter", "CpuPrm_" + connIndexString, true);
-            _driverContext.SetStringProperty(connNamePrefix + "PathTarget", "Target_" + connIndexString, true);
+            if (bComplete)
+            {
+                _driverContext.SetStringProperty(connNamePrefix + "CPUParameter", "CpuPrm_" + connIndexString, true);
+                _driverContext.SetStringProperty(connNamePrefix + "PathTarget", "Target_" + connIndexString, true);
+            }
 
             _log.FunctionExitMessage();
         }

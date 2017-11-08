@@ -39,6 +39,7 @@ namespace OPCUA32_API
                     _driverContext.ModifyCommonProperties();
                     _driverContext.ModifyCOMProperties();
 
+                    //ModifyOptions();
                     ModifyServers();
 
                     _driverContext.CloseDriver();
@@ -55,6 +56,19 @@ namespace OPCUA32_API
                 throw;
             }
         }
+
+        //private void ModifyOptions()
+        //{
+        //    _log.FunctionEntryMessage("modify options");
+
+        //    _driverContext.IncreaseUnsignedProperty("DrvConfig.Options.MaxNodesPerRead", 1, 1000);
+        //    _driverContext.IncreaseUnsignedProperty("DrvConfig.Options.MaxNodesPerWrite", 1, 1000);
+        //    _driverContext.IncreaseUnsignedProperty("DrvConfig.Options.MaxNodesPerBrowse", 1, 1000);
+        //    _driverContext.IncreaseUnsignedProperty("DrvConfig.Options.MaxNodesPerTranslate", 1, 1000);
+        //    _driverContext.IncreaseUnsignedProperty("DrvConfig.Options.MaxMonitoredItemsPerCall", 1, 1000);
+
+        //    _log.FunctionExitMessage();
+        //}
 
         private void ModifyServers()
         {
@@ -81,30 +95,31 @@ namespace OPCUA32_API
             _log.FunctionEntryMessage($"modify {srvrIndex}. server");
 
             _driverContext.SetUnsignedProperty(srvrNamePrefix + "NetAddress", srvrIndex, 0, 65535, true);
-            _driverContext.SetBooleanProperty(srvrNamePrefix + "StorePassword");
+            //_driverContext.SetBooleanProperty(srvrNamePrefix + "StorePassword");
             _driverContext.SetStringProperty(srvrNamePrefix + "Username", "555", true);
             _driverContext.SetStringProperty(srvrNamePrefix + "Password", "666", true);
             _driverContext.IncreaseUnsignedProperty(srvrNamePrefix + "SecurityMode", 1, 3);
 
-            ModifyServerCommunication(srvrNamePrefix);
+            //ModifyServerCommunication(srvrNamePrefix);
             ModifyServerProtocol(srvrNamePrefix);
+            ModifyServerOpLimits(srvrNamePrefix);
 
             _log.FunctionExitMessage();
         }
 
-        private void ModifyServerCommunication(string csPathname)
-        {
-            var commNamePrefix = csPathname + "Communication.";
+        //private void ModifyServerCommunication(string csPathname)
+        //{
+        //    var commNamePrefix = csPathname + "Communication.";
 
-            _log.FunctionEntryMessage("modify communication");
+        //    _log.FunctionEntryMessage("modify communication");
 
-            _driverContext.IncreaseDoubleProperty(commNamePrefix + "PublishInterval", -100000.0, 100000.0);
-            _driverContext.IncreaseUnsignedProperty(commNamePrefix + "LifeTimeCount", 1, 100000);
-            _driverContext.IncreaseUnsignedProperty(commNamePrefix + "KeepAliveCount", 1, 1000);
-            _driverContext.IncreaseDoubleProperty(commNamePrefix + "SamplingInterval", -100000.0, 100000.0);
+        //    _driverContext.IncreaseDoubleProperty(commNamePrefix + "PublishInterval", -100000.0, 100000.0);
+        //    _driverContext.IncreaseUnsignedProperty(commNamePrefix + "LifeTimeCount", 1, 100000);
+        //    _driverContext.IncreaseUnsignedProperty(commNamePrefix + "KeepAliveCount", 1, 1000);
+        //    _driverContext.IncreaseDoubleProperty(commNamePrefix + "SamplingInterval", -100000.0, 100000.0);
 
-            _log.FunctionExitMessage();
-        }
+        //    _log.FunctionExitMessage();
+        //}
 
         private void ModifyServerProtocol(string csPathname)
         {
@@ -112,11 +127,30 @@ namespace OPCUA32_API
 
             _log.FunctionEntryMessage("modify protocol");
 
+            _driverContext.IncreaseDoubleProperty(protNamePrefix + "PublishInterval", -100000.0, 100000.0);
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "LifeTimeCount", 1, 100000);
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "KeepAliveCount", 1, 1000);
+            _driverContext.IncreaseDoubleProperty(protNamePrefix + "SamplingInterval", -100000.0, 100000.0);
             _driverContext.IncreaseUnsignedProperty(protNamePrefix + "DataChangeFilter", 0, 1);
             _driverContext.SetBooleanProperty(protNamePrefix + "AbsoluteDeadband");
             _driverContext.SetBooleanProperty(protNamePrefix + "PersistentNodeIDs");
             _driverContext.SetBooleanProperty(protNamePrefix + "ReadInitialValues");
             _driverContext.SetBooleanProperty(protNamePrefix + "ArraysOnIndexBasis");
+
+            _log.FunctionExitMessage();
+        }
+        private void ModifyServerOpLimits(string csPathname)
+        {
+            var protNamePrefix = csPathname + "OperationLimits.";
+
+            _log.FunctionEntryMessage("modify operation limits");
+
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "MaxNodesPerRead", 1, 1000);
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "MaxNodesPerWrite", 1, 1000);
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "MaxNodesPerBrowse", 1, 1000);
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "MaxNodesPerTranslate", 1, 1000);
+            _driverContext.IncreaseUnsignedProperty(protNamePrefix + "MaxMonitoredItemsPerCall", 1, 1000);
+            _driverContext.SetBooleanProperty(protNamePrefix + "UseServerOperationLimits");
 
             _log.FunctionExitMessage();
         }

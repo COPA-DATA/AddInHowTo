@@ -48,9 +48,10 @@ namespace DriverCommon
         public void FunctionExitMessage()
         {
         }
+   
         public void PropertyModifiedMessage(string propName, object orgValue, object newValue, string propType)
         {
             _editorApplication.DebugPrint($" - [{_driverApiName}]:    [{propName}] from [{orgValue}] to [{newValue}] (value type: {propType})", DebugPrintStyle.Standard);
         }
-    }
+     }
 }

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" InitialTargets="CheckPrerequisites">
   <PropertyGroup>
-    <ProjectGuid>{8279DA33-4EA0-46AD-89CB-8B71FD1B11D0}</ProjectGuid>
+    <ProjectGuid>{C8B6EAAA-66C7-488E-B1E9-5B4DC29AA368}</ProjectGuid>
     <ProjectTypeGuids>{4422A145-E09F-43FE-9F49-8C43BE48D633};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>OPCUA32_API</RootNamespace>
-    <AssemblyName>OPCUA32_API</AssemblyName>
+    <RootNamespace>DNP3_TG_API</RootNamespace>
+    <AssemblyName>DNP3_TG_API</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
@@ -40,12 +40,16 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
     <OutputPath>..\..\bin\Debug\</OutputPath>
+    <ScadaAddInMinimalVersion>8.00</ScadaAddInMinimalVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <Prefer32Bit>false</Prefer32Bit>
     <OutputPath>..\..\bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="Mono.Addins, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
