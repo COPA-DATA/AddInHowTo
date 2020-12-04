@@ -53,6 +53,11 @@ The sub folder "Pages" contains base classes for page ViewModels and a concrete 
 ## Views
 Views are located in this folder. There is again a sub folder "Pages" that contains all page views.
 
+# ObjectCreationWithXmlImport
+This sample demonstrates how to use the xml import functionality to create zenon objects in the zenon engineering studio. In the example the creation of an equipment model based on a template xml export is demonstrated. Creator classes for other zenon objects can be created likewise.
+
+This comes in quite handy when creating large amounts of zenon objects (e.g. thousands of variables) as the COM interface is only triggered once on importing the prepared xml file.
+
 # ThreadingWizardSample
 This sample demonstrates how to use Threads using WPF Wizards. There are different approaches available in .NET Framework, therefore the Add-In project contains four Editor Wizard extensions to demonstrate each approach. All four Wizards generate a usage statistic of data types.
 

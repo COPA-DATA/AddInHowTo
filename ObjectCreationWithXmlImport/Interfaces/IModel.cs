@@ -1,0 +1,6 @@
+﻿namespace XmlImporter
+{
+  interface IModel
+  {
+  }
+}
