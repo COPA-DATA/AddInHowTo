@@ -43,7 +43,7 @@ namespace MvvmEditorWizard.ViewModels.Pages
         }
 
         /// <summary>
-        /// Returns a list of screens
+        /// Returns a list of DataTypes
         /// </summary>
         public IEnumerable<IDataType> ItemList
         {
