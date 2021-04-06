@@ -9,45 +9,56 @@ using Scada.AddIn.Contracts;
 
 namespace MvvmEditorWizard
 {
+  /// <summary>
+  /// Description of Editor Wizard Extension.
+  /// </summary>
+  [AddInExtension("WPF MVVM Sample", "A WPF Wizard that uses the MVVM pattern", "Samples")]
+  public class EditorWizardExtension : IEditorWizardExtension
+  {
+    #region IEditorWizardExtension implementation
+
     /// <summary>
-    /// Description of Editor Wizard Extension.
+    /// Method which is executed on starting the SCADA Editor Wizard
     /// </summary>
-    [AddInExtension("WPF MVVM Sample", "A WPF Wizard that uses the MVVM pattern", "Samples")]
-    public class EditorWizardExtension : IEditorWizardExtension
+    /// <param name="context">SCADA editor application object</param>
+    /// <param name="behavior">For future use</param>
+    public void Run(IEditorApplication context, IBehavior behavior)
     {
-        #region IEditorWizardExtension implementation
+      if (context.Workspace.ActiveProject == null)
+      {
+        MessageBox.Show(string.Format("There is no active project available." + Environment.NewLine +
+                                      "Please load a project into the workspace!")
+                                      , "Wizard with WPF GUI");
+        return;
+      }
 
-        public void Run(IEditorApplication context, IBehavior behavior)
+      try
+      {
+        var pageViewModels = new List<IPageViewModel>
         {
-            if (context.Workspace.ActiveProject == null)
-            {
-                MessageBox.Show("No project is available. Please active a project.");
-                return;
-            }
+          new WelcomeViewModel<WelcomePage>(),
+          new SelectionListViewModel<SelectionListPage>(context.Workspace.ActiveProject)
+        };
 
-            try
-            {
-                var application = new Application();
+        var mainViewModel = new MainViewModel(pageViewModels);
+        var mainView = new MainView 
+        { 
+          DataContext = mainViewModel 
+        };
 
-                var pageViewModels = new List<IPageViewModel>
-                {
-                    new WelcomeViewModel<WelcomePage>(),
-                    new SelectionListViewModel<SelectionListPage>(context.Workspace.ActiveProject)
-                };
-
-                var mainView = new MainView { DataContext = new MainViewModel(pageViewModels) };
-                application.MainWindow = mainView;
-                mainView.Show();
-                application.Run();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"An exception has been thrown: {ex.Message}");
-                throw;
-            }
-        }
-
-        #endregion
+        var application = new Application();
+        application.MainWindow = mainView;
+        mainView.Show();
+        application.Run();
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show($"An exception has been thrown: {ex.Message}", "Wizard with WPF GUI");
+        throw;
+      }
     }
+
+    #endregion
+  }
 
 }
