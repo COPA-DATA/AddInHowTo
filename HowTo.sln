@@ -77,6 +77,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClickUpDown", "ClickUpDown"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClickUpDown", "ClickUpDown\ClickUpDown.csproj", "{B5753287-80CC-4109-9509-7F43C8029C86}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TactileRecognition", "TactileRecognition", "{E8E0BE20-7FC2-4DB7-A0C3-65DDD39648F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TactileRecognition", "TactileRecognition\TactileRecognition.csproj", "{BFB35BC5-4815-4675-8A9C-7D78844DD783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -215,6 +219,12 @@ Global
 		{B5753287-80CC-4109-9509-7F43C8029C86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5753287-80CC-4109-9509-7F43C8029C86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B5753287-80CC-4109-9509-7F43C8029C86}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -246,6 +256,7 @@ Global
 		{0449050D-513A-40BA-A23E-D14D278C8F0A} = {B302C844-2E80-40B1-ABE1-4FB45072D6A9}
 		{F7141E95-5A4F-4B96-97CB-C603DB97EB69} = {7AF57160-9365-4310-8438-12E4D8F7CF8E}
 		{B5753287-80CC-4109-9509-7F43C8029C86} = {8F7A01B5-BD8B-4CB7-8149-A7ABC2009D20}
+		{BFB35BC5-4815-4675-8A9C-7D78844DD783} = {E8E0BE20-7FC2-4DB7-A0C3-65DDD39648F8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C878EAA6-231E-4DCC-BDA0-4F850D285C77}
