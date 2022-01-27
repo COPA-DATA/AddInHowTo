@@ -27,7 +27,7 @@ The library called "CommunicationLibrary" contains code that is shared between A
 
 Two extensions are available in project AddInCommunicationSample:
 * ProjectServiceExtension: The Add-In Service acts as server by hosting the two services DemoService and AlarmService available for other extensions, WPF elements and external apps.
-* ProjectWizardExtension: The Add-In Wizard demonstrates how to consume srvices like IDemoService and IAlarmService.
+* ProjectWizardExtension: The Add-In Wizard demonstrates how to consume services like IDemoService and IAlarmService.
 
 
 There are some reusable components, therefore they are defined in library AddInSampleLibrary
