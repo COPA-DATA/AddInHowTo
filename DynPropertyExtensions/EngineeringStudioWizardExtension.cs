@@ -19,10 +19,13 @@ namespace zenonExtensionsTest
       Debug.Print($"The name of the first font list is: {fontListName}");
 
       var firstFont = firstFontList[0];
-      var fontName = firstFont.GetName();
+
+      var fontName = (string)firstFont.GetDynamicProperty("Name"); // instead of this where you have to find out the propertyPath
+      var fontNameByExtension = firstFont.GetName();         // you can use this extension.
+
       var fontFont = firstFont.GetFont();
       var fontNumber = firstFont.GetNumber();
-      Debug.Print($"The first font is called '{fontName}' and uses the system font '{fontFont}' and has the number {fontNumber}.");
+      Debug.Print($"The first font is called '{fontNameByExtension}' and uses the system font '{fontFont}' and has the number {fontNumber}.");
 
     }
 

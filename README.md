@@ -9,7 +9,7 @@ This repository contains frequently asked sample of zenon Add-In solutions. All 
 # Contents
  1. [AddIn sample library](#addinsamplelibrary) - Subscribe, Communicate and Log
  2. [ClickUpDown](#clickupdown) - React on Screen Element events
- 3. [DriverConfigurationSamples](#driverconfigurationsamples) - Ever wondered how to automatically create drivers?
+ 3. [DriverConfigurationSamples](#driverconfigurationsamples) - Ever wondered how to automatically configure drivers?
  4. [DynamicFilterSample](#dynamicfiltersample) - one screen switch function is enough!
  5. [DynPropertyExtensions](#dynpropertyextensions) - never look up Dynamic Property names again.
  6. [ExtensionWpfElementInteraction](#extensionwpfelementinteraction) - inter process communication
@@ -23,7 +23,7 @@ This repository contains frequently asked sample of zenon Add-In solutions. All 
 <a name="AddInSampleLibrary"></a>
 This project demonstrates show to build custom libraries to share common code between zenon Add-Ins. Following common classes are added to this project:
 
-* Subscription\VariableSubscription.cs: Class VariableSubscription is responsible for variable subscription, by creating an online container and handling the bulk changed event. The changed event uses TPL (Task Parallel Library) to ensure that zenon Runtime gets not blocked during handling a (simulated) long running operation.
+* Subscription\VariableSubscription.cs: Class VariableSubscription is responsible for variable subscription, by creating an online container and handling the bulk changed event. The changed event uses TPL (Task Parallel Library) to ensure that zenon Service Engine gets not blocked during handling a (simulated) long running operation.
 * Logging\NLogConfigurator.sln: A reusable class to add logging functionality to Add-Ins. This code is derived from the training sample [NLogSample](#NLogSample)
 * Communication: Reusable classes to interact between Add-In Extensions, WPF Elements or external code. This sample is documentated [here](#ExtensionWpfElementInteraction)
 * ErrorHandler.cs: Is used to check return values of the zenon API to ensure that the operation that has been called was successfully completed.
@@ -45,11 +45,25 @@ This project implements a service extension which reacts on events triggered by 
 
 # DriverConfigurationSamples
 <a name="DriverConfigurationSamples"></a>
+This folder contains Engineering Studio Wizard examples for configuring following drivers:
+- 3S_V3
+- BACNetNG
+- BeckhNG
+- BURPVI
+- CIFMPI
+- DNP3_TG
+- IEC850
+- Logix32
+- OPCUA32
+- Phloem
+
+The samples for the driver configuration use the `DriverCommon` project. This implements general handling of driver configuration. The driver configuration itself is done with the concept of DynProperties.
 
 [back to Top](#contents)
 
 # DynamicFilterSample
 <a name="DynamicFilterSample"></a>
+This Service Engine wizard exemplifies the modification of a screen switch function. The function is immediately executed via the API with the modification. The modification is only temporarely and is not saved in the zenon project. For an easier access to this sample a zenon project backup is included. 
 
 [back to Top](#contents)
 
@@ -57,6 +71,15 @@ This project implements a service extension which reacts on events triggered by 
 <a name="DynamicFilterSample"></a>
 
 >**Note:** This is experimental. Some parts might not work as expected.
+
+It might be cumbersome to find out the correct string identifier and data type for a DynProperty in zenon. To make things easier you can use this set of generated extensions (Use the files in the according folder for your version of zenon). These extensions extend the zenon datatype and allow you to see the available DynProperties in the IDE immediately.
+
+``` csharp
+// instead of this, where you have to find out the propertyPath
+ var fontName = (string)firstFont.GetDynamicProperty("Name"); 
+ // ...extensions allow you to use this approach:
+ var fontNameByExtension = firstFont.GetName();         
+```
 
 [back to Top](#contents)
 
@@ -115,7 +138,7 @@ This comes in quite handy when creating large amounts of zenon objects (e.g. tho
 # ThreadingWizardSample
 <a name="ExtensionWpfElementInteraction"></a>
 
-This sample demonstrates how to use Threads using WPF Wizards. There are different approaches available in .NET Framework, therefore the Add-In project contains four Editor Wizard extensions to demonstrate each approach. All four Wizards generate a usage statistic of data types.
+This sample demonstrates how to use Threads using WPF Wizards. There are different approaches available in .NET Framework, therefore the Add-In project contains four Engineering Studio Wizard extensions to demonstrate each approach. All four Wizards generate a usage statistic of data types.
 
 * NoThreadWizardExtension: This Wizard does not use a thread. The UI will block the more variables are existing in the project.
 * ThreadingWizardExtension: Uses System.Threading.Thread to load data, therefore the UI is non-blocking. The sample uses the WPF Dispatcher to access the UI.
@@ -124,9 +147,11 @@ This sample demonstrates how to use Threads using WPF Wizards. There are differe
 
 [back to Top](#contents)
 
-
 # VariableReadWrite
 <a name="VariableReadWrite"></a>
+
+This is a very basic but frequently asked-for example on how to read and write values to a variable in zenon. It also shows, that read-only variables cannot be written. Please note that the zenon COM cannot handle ten-thousands of calls per seconds and hence is not useable as alternative value connection. Always use drivers as primarily value source for variables.
+For an easier access to this sample a zenon project backup is included. 
 
 [back to Top](#contents)
 
@@ -137,7 +162,7 @@ Demonstrates how to build a reusable class for online containers for variables.
 
 This sample is based on [AddInSampleLibrary](#AddInSampleLibrary).
 
-* AddInSampleLibrary\Subscription\VariableSubscription.cs: Class VariableSubscription is responsible for variable subscription, by creating an online container and handling the bulk changed event. The changed event uses TPL (Task Parallel Library) to ensure that zenon Runtime gets not blocked during handling a (simulated) long running operation.
+* AddInSampleLibrary\Subscription\VariableSubscription.cs: Class VariableSubscription is responsible for variable subscription, by creating an online container and handling the bulk changed event. The changed event uses TPL (Task Parallel Library) to ensure that zenon Service Engine gets not blocked during handling a (simulated) long running operation.
 * AddInSampleLibrary\ErrorHandler.cs: Is used to check return values of the zenon API to ensure that the operation that has been called was successfully completed.
 * AddInSampleLibrary\Logging\NLogConfigurator.cs: Is used log the inner operations of class VariableSubscription and the Add-In extension.
 
