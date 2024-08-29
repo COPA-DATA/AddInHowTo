@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using AddInSampleLibrary.Logging;
 using NLog;
 using Scada.AddIn.Contracts;
 
@@ -20,8 +19,7 @@ namespace ClickUpDown
     public void Start(IProject context, IBehavior behavior)
     {
       
-      var configurator = new NLogConfigurator();
-      configurator.Configure();
+
       project = context;
 
       if(context == null)
