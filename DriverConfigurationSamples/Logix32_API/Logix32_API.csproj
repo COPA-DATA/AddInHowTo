@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Logix32_API</RootNamespace>
     <AssemblyName>Logix32_API</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
