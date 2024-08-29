@@ -8,7 +8,7 @@ namespace ClickUpDown
   /// <summary>
   /// Description of Project Service Extension.
   /// </summary>
-  [AddInExtension("ClickUpDown Service", "This service extention reacts on click up or click down events on screen elements.")]
+  [AddInExtension("ClickUpDown Service", "This service extension reacts on click up or click down events on screen elements.")]
   public class ProjectServiceExtension : IProjectServiceExtension
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
