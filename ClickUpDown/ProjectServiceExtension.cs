@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using AddInSampleLibrary.Logging;
 using NLog;
 using Scada.AddIn.Contracts;
 
@@ -9,7 +8,7 @@ namespace ClickUpDown
   /// <summary>
   /// Description of Project Service Extension.
   /// </summary>
-  [AddInExtension("ClickUpDown Service", "This service extention reacts on click up or click down events on screen elements.")]
+  [AddInExtension("ClickUpDown Service", "This service extension reacts on click up or click down events on screen elements.")]
   public class ProjectServiceExtension : IProjectServiceExtension
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -20,8 +19,7 @@ namespace ClickUpDown
     public void Start(IProject context, IBehavior behavior)
     {
       
-      var configurator = new NLogConfigurator();
-      configurator.Configure();
+
       project = context;
 
       if(context == null)

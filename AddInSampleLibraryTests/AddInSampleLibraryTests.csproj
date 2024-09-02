@@ -3,12 +3,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC0B46AD-6D8A-4211-9323-C21B95F857E6}</ProjectGuid>
+    <ProjectGuid>{E71944AF-D6AB-407B-92C6-5E0CE0EED34D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AddInSampleLibraryTests</RootNamespace>
     <AssemblyName>AddInSampleLibraryTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -21,6 +21,7 @@
     <ScadaCurrentVersion32BitPathKey Condition="'$(ScadaCurrentVersion)' != ''">ProgramDir32_$(ScadaCurrentVersion)</ScadaCurrentVersion32BitPathKey>
     <ScadaCurrentVersion32BitPath>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\COPA-DATA\DataDir', $(ScadaCurrentVersion32BitPathKey), null, RegistryView.Registry32))</ScadaCurrentVersion32BitPath>
     <ScadaCurrentVersionAddInFramwork>$(ScadaCurrentVersion32BitPath)AddInFramework\</ScadaCurrentVersionAddInFramwork>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -72,7 +73,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AddInSampleLibrary\AddInSampleLibrary\AddInSampleLibrary.csproj">
+    <ProjectReference Include="..\AddInSampleLibrary\AddInSampleLibrary.csproj">
       <Project>{c529c106-df81-4869-bcaf-a3eced734723}</Project>
       <Name>AddInSampleLibrary</Name>
     </ProjectReference>

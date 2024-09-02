@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>IEC850_API</RootNamespace>
     <AssemblyName>IEC850_API</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>

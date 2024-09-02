@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>VariableSubscriptionSample</RootNamespace>
     <AssemblyName>VariableSubscriptionSample</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <NoWin32Manifest>False</NoWin32Manifest>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -62,7 +62,7 @@
     <Compile Include="Properties\AddInInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\AddInSampleLibrary\AddInSampleLibrary\AddInSampleLibrary.csproj">
+    <ProjectReference Include="..\AddInSampleLibrary\AddInSampleLibrary.csproj">
       <Project>{c529c106-df81-4869-bcaf-a3eced734723}</Project>
       <Name>AddInSampleLibrary</Name>
     </ProjectReference>
